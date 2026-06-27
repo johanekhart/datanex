@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Datanex — Brand Identity Reference</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --white: #FFFFFF;
+    --off-white: #F7F7F8;
+    --light-gray: #E8E8EC;
+    --mid-gray: #9999AA;
+    --dark-gray: #333344;
+    --black: #0A0A0F;
+    --cyan: #00D4FF;
+    --cyan-dim: rgba(0, 212, 255, 0.10);
+    --cyan-mid: rgba(0, 212, 255, 0.35);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--white);
+    color: var(--black);
+    font-family: 'Space Grotesk', sans-serif;
+    line-height: 1.6;
+  }
+
+  /* ── LAYOUT ── */
+  header {
+    padding: 24px 48px;
+    border-bottom: 1px solid var(--light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  section {
+    padding: 56px 48px;
+    border-bottom: 1px solid var(--light-gray);
+  }
+  section h2 {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin-bottom: 36px;
+  }
+
+  /* ── LOGO ── */
+  .logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: -0.04em; color: var(--black); }
+  .logo .dot { color: var(--cyan); }
+
+  /* ── FAVICON MARK ── */
+  .favicon-mark { display: inline-flex; align-items: flex-start; position: relative; }
+
+  /* ── COLOR SWATCHES ── */
+  .swatch-row { display: flex; flex-wrap: wrap; gap: 0; }
+  .swatch { width: 140px; }
+  .swatch-block { height: 72px; border: 1px solid rgba(0,0,0,0.05); }
+  .swatch-info { padding: 10px 0 0; }
+  .swatch-name { font-weight: 600; font-size: 13px; display: block; }
+  .swatch-hex { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--mid-gray); }
+  .swatch-role { font-size: 11px; color: var(--mid-gray); display: block; margin-top: 2px; }
+
+  /* ── TYPE ── */
+  .type-row + .type-row { margin-top: 28px; padding-top: 28px; border-top: 1px solid var(--light-gray); }
+  .type-meta { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--mid-gray); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px; }
+
+  /* ── COMPONENTS ── */
+  .comp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+  .card { border: 1px solid var(--light-gray); border-radius: 6px; padding: 22px; }
+  .card-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mid-gray); margin-bottom: 8px; }
+  .card-value { font-size: 26px; font-weight: 700; letter-spacing: -0.03em; }
+  .card-delta { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--cyan); margin-top: 4px; }
+  .card-delta.neg { color: #FF4D6D; }
+  .bar { height: 3px; background: var(--light-gray); border-radius: 2px; margin-top: 14px; overflow: hidden; }
+  .bar-fill { height: 100%; background: var(--cyan); border-radius: 2px; }
+  .tag { display: inline-block; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; margin-top: 12px; margin-right: 6px; }
+  .tag-agent { background: var(--cyan-dim); color: var(--cyan); border: 1px solid var(--cyan-mid); }
+  .tag-privacy { background: rgba(180,180,255,0.08); color: #8888FF; border: 1px solid rgba(136,136,255,0.25); }
+  .tag-neutral { background: transparent; color: var(--mid-gray); border: 1px solid var(--light-gray); }
+
+  .btn-black { display: inline-block; background: var(--black); color: var(--white); font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; padding: 10px 20px; border-radius: 4px; border: none; cursor: pointer; }
+  .btn-outline { display: inline-block; background: transparent; color: var(--black); font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; padding: 10px 20px; border-radius: 4px; border: 1.5px solid var(--black); cursor: pointer; margin-left: 10px; }
+  .btn-cyan { display: inline-block; background: var(--cyan); color: var(--black); font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 700; padding: 10px 20px; border-radius: 4px; border: none; cursor: pointer; margin-left: 10px; }
+
+  /* ── WIREFRAME ── */
+  .wireframe-wrap { background: var(--black); border-radius: 8px; overflow: hidden; height: 360px; position: relative; }
+  canvas { width: 100%; height: 100%; display: block; }
+
+  /* ── HERO PREVIEW ── */
+  .hero { background: var(--white); border: 1px solid var(--light-gray); border-radius: 8px; overflow: hidden; }
+  .hero-inner { padding: 72px 60px 56px; position: relative; }
+  .hero-eyebrow { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cyan); margin-bottom: 18px; }
+  .hero-headline { font-size: 48px; font-weight: 700; letter-spacing: -0.04em; line-height: 1.05; max-width: 540px; margin-bottom: 20px; }
+  .hero-sub { font-size: 15px; color: var(--mid-gray); max-width: 440px; line-height: 1.75; margin-bottom: 32px; }
+  .hero-stats { display: flex; gap: 44px; padding-top: 44px; border-top: 1px solid var(--light-gray); flex-wrap: wrap; }
+  .hero-stat-val { font-size: 22px; font-weight: 700; letter-spacing: -0.03em; }
+  .hero-stat-val.accent { color: var(--cyan); }
+  .hero-stat-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid-gray); margin-top: 4px; }
+
+  /* ── NAV PREVIEW ── */
+  .nav-preview { display: flex; align-items: center; justify-content: space-between; padding: 14px 32px; border: 1px solid var(--light-gray); border-radius: 6px; }
+  .nav-links { display: flex; gap: 28px; font-family: 'Space Mono', monospace; font-size: 11px; color: var(--mid-gray); letter-spacing: 0.05em; }
+
+  /* ── SPACING / RADIUS ── */
+  .spec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+  .spec-item { border: 1px solid var(--light-gray); border-radius: 6px; padding: 18px 20px; }
+  .spec-item .spec-label { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--mid-gray); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+  .spec-item .spec-val { font-size: 15px; font-weight: 600; }
+  .spec-item code { font-family: 'Space Mono', monospace; font-size: 13px; color: var(--dark-gray); background: var(--off-white); padding: 2px 6px; border-radius: 3px; }
+
+  /* ── DO / DON'T ── */
+  .rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 720px; }
+  .rule-do { border: 1.5px solid #00C48C; border-radius: 6px; padding: 18px 20px; }
+  .rule-dont { border: 1.5px solid #FF4D6D; border-radius: 6px; padding: 18px 20px; }
+  .rule-head { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 10px; }
+  .rule-do .rule-head { color: #00C48C; }
+  .rule-dont .rule-head { color: #FF4D6D; }
+  .rule-item { font-size: 13px; color: var(--dark-gray); line-height: 1.6; margin-bottom: 6px; padding-left: 14px; position: relative; }
+  .rule-item::before { content: '—'; position: absolute; left: 0; color: var(--mid-gray); }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     HEADER
+══════════════════════════════════════════ -->
+<header>
+  <div style="display:flex; align-items:center; gap:10px;">
+    <!-- Favicon mark inline -->
+    <svg width="22" height="22" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <text x="1" y="26" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="26" fill="#0A0A0F">d</text>
+      <circle cx="27" cy="7" r="4.5" fill="#00D4FF"/>
+    </svg>
+    <span class="logo" style="font-size:18px;">datanex<span class="dot">.</span></span>
+  </div>
+  <span style="font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.15em; color:var(--mid-gray); text-transform:uppercase;">Brand Identity Reference — v1.0</span>
+</header>
+
+
+<!-- ══════════════════════════════════════════
+     1. LOGO
+══════════════════════════════════════════ -->
+<section>
+  <h2>01 — Logo</h2>
+
+  <div style="display:flex; flex-wrap:wrap; gap:24px; margin-bottom:40px;">
+
+    <!-- Licht groot -->
+    <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+      <div style="background:var(--off-white); border:1px solid var(--light-gray); border-radius:6px; padding:36px 48px;">
+        <span class="logo" style="font-size:36px;">datanex<span class="dot">.</span></span>
+      </div>
+      <span style="font-family:'Space Mono',monospace; font-size:10px; color:var(--mid-gray);">Primair — licht</span>
+    </div>
+
+    <!-- Donker groot -->
+    <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+      <div style="background:var(--black); border-radius:6px; padding:36px 48px;">
+        <span class="logo" style="font-size:36px; color:#FFFFFF;">datanex<span class="dot">.</span></span>
+      </div>
+      <span style="font-family:'Space Mono',monospace; font-size:10px; color:var(--mid-gray);">Dark mode</span>
+    </div>
+
+    <!-- Kleine nav versie -->
+    <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+      <div style="background:var(--off-white); border:1px solid var(--light-gray); border-radius:6px; padding:24px 32px;">
+        <span class="logo" style="font-size:18px;">datanex<span class="dot">.</span></span>
+      </div>
+      <span style="font-family:'Space Mono',monospace; font-size:10px; color:var(--mid-gray);">Navigatie — 18px</span>
+    </div>
+
+  </div>
+
+  <!-- Logo SVG code voor Claude Code -->
+  <div style="background:var(--off-white); border:1px solid var(--light-gray); border-radius:6px; padding:20px 24px; max-width:640px;">
+    <div style="font-family:'Space Mono',monospace; font-size:10px; color:var(--mid-gray); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:12px;">HTML implementatie</div>
+    <pre style="font-family:'Space Mono',monospace; font-size:12px; color:var(--dark-gray); line-height:1.7; white-space:pre-wrap;">&lt;span style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:18px; letter-spacing:-0.04em; color:#0A0A0F;"&gt;datanex&lt;span style="color:#00D4FF;"&gt;.&lt;/span&gt;&lt;/span&gt;</pre>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     2. FAVICON
+══════════════════════════════════════════ -->
+<section>
+  <h2>02 — Favicon</h2>
+  <p style="font-size:14px; color:var(--dark-gray); margin-bottom:28px; max-width:520px;">Kleine <strong>d</strong> in Space Grotesk Bold met cyaan stip rechtsboven. De stip echoot de cyaan punt in het logo — één consistent accent door de hele identiteit.</p>
+
+  <div style="display:flex; align-items:flex-end; gap:32px; flex-wrap:wrap; margin-bottom:36px;">
+
+    <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+      <div style="background:var(--off-white); border:1px solid var(--light-gray); border-radius:6px; padding:20px 24px;">
+        <svg width="64" height="64" viewBox="0 0 32 32" fill="none">
+          <text x="1" y="26" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="26" fill="#0A0A0F">d</text>
+          <circle cx="27" cy="7" r="4.5" fill="#00D4FF"/>
+        </svg>
+      </div>
+      <span style="font-family:'Space Mono',monospace; font-size:10px; color:var(--mid-gray);">64px</span>
+    </div>
+
+    <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+      <div style="background:var(--off-white); border:1px solid var(--light-gray); border-radius:6px; padding:20px 24px;">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <text x="1" y="26" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="26" fill="#0A0A0F">d</text>
+          <circle cx="27" cy="7" r="4.5" fill="#00D4FF"/>
+        </svg>
+      </div>
+      <span style="font-family:'Space Mono',monospace; font-size:10px; color:var(--mid-gray);">32px</span>
+    </div>
+
+    <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+      <div style="background:var(--off-white); border:1px solid var(--light-gray); border-radius:6px; padding:20px 24px;">
+        <svg width="16" height="16" viewBox="0 0 32 32" fill="none">
+          <text x="1" y="26" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="26" fill="#0A0A0F">d</text>
+          <circle cx="27" cy="7" r="4.5" fill="#00D4FF"/>
+        </svg>
+      </div>
+      <span style="font-family:'Space Mono',monospace; font-size:10px; color:var(--mid-gray);">16px — favicon</span>
+    </div>
+
+    <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+      <div style="background:var(--black); border-radius:6px; padding:20px 24px;">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <text x="1" y="26" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="26" fill="#FFFFFF">d</text>
+          <circle cx="27" cy="7" r="4.5" fill="#00D4FF"/>
+        </svg>
+      </div>
+      <span style="font-family:'Space Mono',monospace; font-size:10px; color:var(--mid-gray);">Dark 32px</span>
+    </div>
+
+  </div>
+
+  <!-- Browser simulatie -->
+  <div style="background:#E4E4E7; border-radius:8px 8px 0 0; padding:10px 16px; display:flex; align-items:center; gap:8px; max-width:480px;">
+    <svg width="16" height="16" viewBox="0 0 32 32" fill="none">
+      <text x="1" y="26" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="26" fill="#0A0A0F">d</text>
+      <circle cx="27" cy="7" r="4.5" fill="#00D4FF"/>
+    </svg>
+    <span style="font-family:'Space Mono',monospace; font-size:11px; color:#666;">datanex.nl</span>
+    <span style="font-family:'Space Mono',monospace; font-size:11px; color:#aaa; margin-left:auto;">×</span>
+  </div>
+  <div style="background:white; border:1px solid var(--light-gray); border-top:none; border-radius:0 0 8px 8px; padding:10px 16px; max-width:480px; display:flex; align-items:center; gap:8px;">
+    <span style="font-size:11px; color:#aaa;">🔒</span>
+    <span style="font-family:'Space Mono',monospace; font-size:11px; color:var(--mid-gray);">datanex.nl/dashboard</span>
+  </div>
+
+  <!-- Favicon SVG code -->
+  <div style="background:var(--off-white); border:1px solid var(--light-gray); border-radius:6px; padding:20px 24px; max-width:640px; margin-top:28px;">
+    <div style="font-family:'Space Mono',monospace; font-size:10px; color:var(--mid-gray); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:12px;">SVG — favicon.svg</div>
+    <pre style="font-family:'Space Mono',monospace; font-size:12px; color:var(--dark-gray); line-height:1.7; white-space:pre-wrap;">&lt;svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"&gt;
+  &lt;text x="1" y="26" font-family="'Space Grotesk', sans-serif"
+    font-weight="700" font-size="26" fill="#0A0A0F"&gt;d&lt;/text&gt;
+  &lt;circle cx="27" cy="7" r="4.5" fill="#00D4FF"/&gt;
+&lt;/svg&gt;</pre>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     3. KLEUREN
+══════════════════════════════════════════ -->
+<section>
+  <h2>03 — Kleurpalet</h2>
+  <div class="swatch-row">
+    <div class="swatch">
+      <div class="swatch-block" style="background:#FFFFFF; border:1px solid #E8E8EC;"></div>
+      <div class="swatch-info">
+        <span class="swatch-name">White</span>
+        <span class="swatch-hex">#FFFFFF</span>
+        <span class="swatch-role">Primaire achtergrond</span>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-block" style="background:#F7F7F8;"></div>
+      <div class="swatch-info">
+        <span class="swatch-name">Off-white</span>
+        <span class="swatch-hex">#F7F7F8</span>
+        <span class="swatch-role">Sectie / card achtergrond</span>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-block" style="background:#E8E8EC;"></div>
+      <div class="swatch-info">
+        <span class="swatch-name">Light Gray</span>
+        <span class="swatch-hex">#E8E8EC</span>
+        <span class="swatch-role">Borders / dividers</span>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-block" style="background:#9999AA;"></div>
+      <div class="swatch-info">
+        <span class="swatch-name">Mid Gray</span>
+        <span class="swatch-hex">#9999AA</span>
+        <span class="swatch-role">Labels / metadata / mono</span>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-block" style="background:#333344;"></div>
+      <div class="swatch-info">
+        <span class="swatch-name">Dark Gray</span>
+        <span class="swatch-hex">#333344</span>
+        <span class="swatch-role">Body tekst / secondary</span>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-block" style="background:#0A0A0F;"></div>
+      <div class="swatch-info">
+        <span class="swatch-name">Black</span>
+        <span class="swatch-hex">#0A0A0F</span>
+        <span class="swatch-role">Headlines / primary tekst</span>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-block" style="background:#00D4FF;"></div>
+      <div class="swatch-info">
+        <span class="swatch-name">Cyan — Enige accentkleur</span>
+        <span class="swatch-hex">#00D4FF</span>
+        <span class="swatch-role">Highlights / CTA / nodes</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:28px; background:var(--off-white); border:1px solid var(--light-gray); border-radius:6px; padding:18px 22px; max-width:600px;">
+    <div style="font-family:'Space Mono',monospace; font-size:10px; color:var(--mid-gray); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:10px;">CSS variabelen — kopieer in :root</div>
+    <pre style="font-family:'Space Mono',monospace; font-size:12px; color:var(--dark-gray); line-height:1.8; white-space:pre-wrap;">--white:      #FFFFFF;
+--off-white:  #F7F7F8;
+--light-gray: #E8E8EC;
+--mid-gray:   #9999AA;
+--dark-gray:  #333344;
+--black:      #0A0A0F;
+--cyan:       #00D4FF;
+--cyan-dim:   rgba(0, 212, 255, 0.10);
+--cyan-mid:   rgba(0, 212, 255, 0.35);</pre>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     4. TYPOGRAFIE
+══════════════════════════════════════════ -->
+<section>
+  <h2>04 — Typografie</h2>
+
+  <div style="background:var(--off-white); border:1px solid var(--light-gray); border-radius:6px; padding:18px 22px; max-width:600px; margin-bottom:36px;">
+    <div style="font-family:'Space Mono',monospace; font-size:10px; color:var(--mid-gray); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:10px;">Google Fonts import</div>
+    <pre style="font-family:'Space Mono',monospace; font-size:12px; color:var(--dark-gray); line-height:1.7; white-space:pre-wrap;">&lt;link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"&gt;</pre>
+  </div>
+
+  <div class="type-row">
+    <div class="type-meta">Display — Space Grotesk 700 · Headlines · letter-spacing: -0.04em</div>
+    <div style="font-size:40px; font-weight:700; letter-spacing:-0.04em; line-height:1.05;">AI Agent Economy<br>Live Dashboard</div>
+  </div>
+
+  <div class="type-row">
+    <div class="type-meta">Subheading — Space Grotesk 600 · letter-spacing: -0.02em</div>
+    <div style="font-size:22px; font-weight:600; letter-spacing:-0.02em; color:var(--dark-gray);">Real-time statistieken voor AI crypto projecten</div>
+  </div>
+
+  <div class="type-row">
+    <div class="type-meta">Body — Space Grotesk 400 · font-size: 15px · line-height: 1.75</div>
+    <div style="font-size:15px; color:var(--dark-gray); line-height:1.75; max-width:500px;">Datanex onderscheidt hype van echte utiliteit. Protocol revenue, active wallets, agent GDP en privacy-metrics — geen speculatie, alleen data.</div>
+  </div>
+
+  <div class="type-row">
+    <div class="type-meta">Mono labels — Space Mono 400 · font-size: 10–11px · letter-spacing: 0.15em · UPPERCASE</div>
+    <div style="font-family:'Space Mono',monospace; font-size:11px; color:var(--mid-gray); letter-spacing:0.15em; text-transform:uppercase;">PROTOCOL REVENUE · ACTIVE WALLETS · AGENT GDP · TEE NODES · 24H VOLUME</div>
+  </div>
+
+  <div class="type-row">
+    <div class="type-meta">Data value — Space Grotesk 700 · Grote getallen · letter-spacing: -0.05em</div>
+    <div style="font-size:34px; font-weight:700; letter-spacing:-0.05em;">$38.2M <span style="font-size:16px; font-weight:400; color:var(--mid-gray);">/ maand</span></div>
+    <div style="font-family:'Space Mono',monospace; font-size:11px; color:var(--cyan); margin-top:4px; letter-spacing:0.08em;">↑ +23% YTD</div>
+  </div>
+
+  <!-- Type scale tabel -->
+  <div style="margin-top:32px; border:1px solid var(--light-gray); border-radius:6px; overflow:hidden; max-width:640px;">
+    <div style="background:var(--off-white); padding:10px 18px; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--mid-gray); border-bottom:1px solid var(--light-gray);">Type scale</div>
+    <table style="width:100%; border-collapse:collapse; font-size:13px;">
+      <tr style="border-bottom:1px solid var(--light-gray);">
+        <td style="padding:10px 18px; font-family:'Space Mono',monospace; font-size:11px; color:var(--mid-gray);">Hero headline</td>
+        <td style="padding:10px 18px;">Space Grotesk 700</td>
+        <td style="padding:10px 18px; font-family:'Space Mono',monospace; font-size:11px;">48–56px / -0.04em</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--light-gray);">
+        <td style="padding:10px 18px; font-family:'Space Mono',monospace; font-size:11px; color:var(--mid-gray);">Section heading</td>
+        <td style="padding:10px 18px;">Space Grotesk 700</td>
+        <td style="padding:10px 18px; font-family:'Space Mono',monospace; font-size:11px;">28–32px / -0.03em</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--light-gray);">
+        <td style="padding:10px 18px; font-family:'Space Mono',monospace; font-size:11px; color:var(--mid-gray);">Card title</td>
+        <td style="padding:10px 18px;">Space Grotesk 600</td>
+        <td style="padding:10px 18px; font-family:'Space Mono',monospace; font-size:11px;">18–20px / -0.02em</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--light-gray);">
+        <td style="padding:10px 18px; font-family:'Space Mono',monospace; font-size:11px; color:var(--mid-gray);">Body</td>
+        <td style="padding:10px 18px;">Space Grotesk 400</td>
+        <td style="padding:10px 18px; font-family:'Space Mono',monospace; font-size:11px;">14–15px / 1.75</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--light-gray);">
+        <td style="padding:10px 18px; font-family:'Space Mono',monospace; font-size:11px; color:var(--mid-gray);">Data value</td>
+        <td style="padding:10px 18px;">Space Grotesk 700</td>
+        <td style="padding:10px 18px; font-family:'Space Mono',monospace; font-size:11px;">24–36px / -0.05em</td>
+      </tr>
+      <tr>
+        <td style="padding:10px 18px; font-family:'Space Mono',monospace; font-size:11px; color:var(--mid-gray);">Labels / meta</td>
+        <td style="padding:10px 18px;">Space Mono 400</td>
+        <td style="padding:10px 18px; font-family:'Space Mono',monospace; font-size:11px;">10–11px / 0.15em UC</td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     5. WIREFRAME SIGNATUUR
+══════════════════════════════════════════ -->
+<section>
+  <h2>05 — 3D Wireframe Signatuur</h2>
+  <p style="font-size:14px; color:var(--dark-gray); max-width:520px; margin-bottom:24px; line-height:1.7;">Roterend node-netwerk op zwarte achtergrond. Gebruik als hero-achtergrond, laadscherm of decoratief sectie-element. Altijd op donkere ondergrond.</p>
+  <div class="wireframe-wrap">
+    <canvas id="wf"></canvas>
+  </div>
+  <p style="font-family:'Space Mono',monospace; font-size:10px; color:var(--mid-gray); margin-top:10px; letter-spacing:0.08em;">GEBRUIK: hero sectie achtergrond · laadanimatie · decoratieve sectie-accenten</p>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     6. UI COMPONENTEN
+══════════════════════════════════════════ -->
+<section>
+  <h2>06 — UI Componenten</h2>
+
+  <!-- Data cards -->
+  <div style="font-family:'Space Mono',monospace; font-size:10px; color:var(--mid-gray); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:16px;">Data cards</div>
+  <div class="comp-grid" style="margin-bottom:40px;">
+    <div class="card">
+      <div class="card-label">Protocol Revenue</div>
+      <div class="card-value">$38.2M <span style="font-size:14px; font-weight:400; color:var(--mid-gray);">/ maand</span></div>
+      <div class="card-delta">↑ +23.4% YTD</div>
+      <div class="bar"><div class="bar-fill" style="width:71%"></div></div>
+      <span class="tag tag-neutral">Render</span><span class="tag tag-neutral">DePIN</span>
+    </div>
+    <div class="card">
+      <div class="card-label">Active Wallets</div>
+      <div class="card-value">23,514</div>
+      <div class="card-delta">↑ +8.1% this week</div>
+      <div class="bar"><div class="bar-fill" style="width:44%"></div></div>
+      <span class="tag tag-agent">Agent</span><span class="tag tag-neutral">Virtuals</span>
+    </div>
+    <div class="card">
+      <div class="card-label">Private Inference</div>
+      <div class="card-value">1.2B <span style="font-size:14px; font-weight:400; color:var(--mid-gray);">req</span></div>
+      <div class="card-delta neg">↓ −2.1% this week</div>
+      <div class="bar"><div class="bar-fill" style="width:28%; background:#8888FF;"></div></div>
+      <span class="tag tag-privacy">Privacy</span><span class="tag tag-neutral">NEAR</span>
+    </div>
+  </div>
+
+  <!-- Tags -->
+  <div style="font-family:'Space Mono',monospace; font-size:10px; color:var(--mid-gray); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:14px;">Tags / badges</div>
+  <div style="margin-bottom:40px;">
+    <span class="tag tag-agent">AI Agent</span>
+    <span class="tag tag-privacy">Privacy</span>
+    <span class="tag tag-neutral">DePIN</span>
+    <span class="tag tag-neutral">Compute</span>
+    <span class="tag tag-neutral">Data Layer</span>
+  </div>
+
+  <!-- Buttons -->
+  <div style="font-family:'Space Mono',monospace; font-size:10px; color:var(--mid-gray); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:14px;">Buttons</div>
+  <div>
+    <button class="btn-black">Bekijk Dashboard</button>
+    <button class="btn-outline">Alle projecten</button>
+    <button class="btn-cyan">Live Data</button>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     7. NAVIGATIE
+══════════════════════════════════════════ -->
+<section>
+  <h2>07 — Navigatie</h2>
+
+  <div class="nav-preview" style="margin-bottom:10px;">
+    <div style="display:flex; align-items:center; gap:9px;">
+      <svg width="18" height="18" viewBox="0 0 32 32" fill="none">
+        <text x="1" y="26" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="26" fill="#0A0A0F">d</text>
+        <circle cx="27" cy="7" r="4.5" fill="#00D4FF"/>
+      </svg>
+      <span class="logo" style="font-size:18px;">datanex<span class="dot">.</span></span>
+    </div>
+    <div class="nav-links">
+      <span>Dashboard</span><span>Projecten</span><span>Agent Economy</span><span>Privacy</span>
+    </div>
+    <button class="btn-cyan" style="font-size:12px; padding:8px 16px;">Live Data</button>
+  </div>
+
+  <div style="background:var(--black); border-radius:6px; padding:14px 32px; display:flex; align-items:center; justify-content:space-between;">
+    <div style="display:flex; align-items:center; gap:9px;">
+      <svg width="18" height="18" viewBox="0 0 32 32" fill="none">
+        <text x="1" y="26" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="26" fill="#FFFFFF">d</text>
+        <circle cx="27" cy="7" r="4.5" fill="#00D4FF"/>
+      </svg>
+      <span class="logo" style="font-size:18px; color:#FFFFFF;">datanex<span class="dot">.</span></span>
+    </div>
+    <div class="nav-links">
+      <span>Dashboard</span><span>Projecten</span><span>Agent Economy</span><span>Privacy</span>
+    </div>
+    <button class="btn-cyan" style="font-size:12px; padding:8px 16px;">Live Data</button>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     8. SPACING & RADIUS
+══════════════════════════════════════════ -->
+<section>
+  <h2>08 — Spacing & Border-radius</h2>
+  <div class="spec-grid">
+    <div class="spec-item">
+      <div class="spec-label">Page padding</div>
+      <div class="spec-val"><code>48px</code> zijkanten</div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-label">Section padding</div>
+      <div class="spec-val"><code>56px</code> boven/onder</div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-label">Card padding</div>
+      <div class="spec-val"><code>20–24px</code></div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-label">Border-radius cards</div>
+      <div class="spec-val"><code>6px</code> max</div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-label">Border-radius buttons</div>
+      <div class="spec-val"><code>4px</code></div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-label">Dividers</div>
+      <div class="spec-val"><code>1px</code> solid <code>#E8E8EC</code></div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-label">Grid gap (cards)</div>
+      <div class="spec-val"><code>20px</code></div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-label">Max content width</div>
+      <div class="spec-val"><code>1280px</code></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     9. HERO PREVIEW
+══════════════════════════════════════════ -->
+<section>
+  <h2>09 — Homepage Hero Preview</h2>
+  <div class="hero">
+    <div class="hero-inner">
+      <div style="position:absolute; top:0; right:0; width:320px; height:100%; overflow:hidden; opacity:0.05; pointer-events:none;">
+        <svg width="320" height="400" viewBox="0 0 320 400" fill="none">
+          <polygon points="160,20 290,95 290,285 160,360 30,285 30,95" fill="none" stroke="#00D4FF" stroke-width="1"/>
+          <polygon points="160,65 250,120 250,250 160,305 70,250 70,120" fill="none" stroke="#00D4FF" stroke-width="1"/>
+          <line x1="160" y1="20" x2="160" y2="360" stroke="#00D4FF" stroke-width="0.5"/>
+          <line x1="30" y1="95" x2="290" y2="285" stroke="#00D4FF" stroke-width="0.5"/>
+          <line x1="290" y1="95" x2="30" y2="285" stroke="#00D4FF" stroke-width="0.5"/>
+        </svg>
+      </div>
+      <div class="hero-eyebrow">Live AI Crypto Intelligence</div>
+      <div class="hero-headline">Data die hype<br>van waarde scheidt.</div>
+      <div class="hero-sub">Real-time statistieken voor AI Agent projecten en AI Privacy protocollen. Protocol revenue, on-chain activiteit, agent economy — alles op één plek.</div>
+      <button class="btn-black" style="font-size:14px; padding:12px 24px;">Bekijk Dashboard</button>
+      <button class="btn-outline" style="font-size:14px; padding:12px 24px;">Alle projecten →</button>
+      <div class="hero-stats">
+        <div><div class="hero-stat-val">919</div><div class="hero-stat-label">Actieve projecten</div></div>
+        <div><div class="hero-stat-val">$22.6B</div><div class="hero-stat-label">Sector marktcap</div></div>
+        <div><div class="hero-stat-val accent">479M</div><div class="hero-stat-label">Agent GDP (USDC)</div></div>
+        <div><div class="hero-stat-val">1.78M</div><div class="hero-stat-label">Agent jobs voltooid</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     10. DO'S & DON'TS
+══════════════════════════════════════════ -->
+<section style="border-bottom:none;">
+  <h2>10 — Do's &amp; Don'ts voor Claude Code</h2>
+  <div class="rules-grid">
+    <div class="rule-do">
+      <div class="rule-head">✓ Do</div>
+      <div class="rule-item">Witte achtergrond (#FFFFFF) als basis</div>
+      <div class="rule-item">Cyan (#00D4FF) alleen als accent — nooit als achtergrond</div>
+      <div class="rule-item">Space Mono voor alle labels, data en metadata</div>
+      <div class="rule-item">Strakke borders: 1px solid #E8E8EC</div>
+      <div class="rule-item">Getallen groot en bold met negatieve letter-spacing</div>
+      <div class="rule-item">Border-radius max 6px op cards, 4px op buttons</div>
+      <div class="rule-item">Favicon altijd: d + cyaan stip rechtsbovenin</div>
+      <div class="rule-item">Logo altijd: datanex. (lowercase, punt is #00D4FF)</div>
+    </div>
+    <div class="rule-dont">
+      <div class="rule-head">✗ Don't</div>
+      <div class="rule-item">Geen gekleurde achtergronden buiten het palet</div>
+      <div class="rule-item">Geen gradiënten</div>
+      <div class="rule-item">Geen andere lettertypes dan Space Grotesk + Space Mono</div>
+      <div class="rule-item">Geen border-radius groter dan 6px</div>
+      <div class="rule-item">Geen schaduwen (box-shadow) — alleen borders</div>
+      <div class="rule-item">Geen emoji's of illustraties</div>
+      <div class="rule-item">Cyan nooit op grote vlakken gebruiken</div>
+      <div class="rule-item">Logo nooit in hoofdletters (DATANEX.) tonen</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     WIREFRAME CANVAS SCRIPT
+══════════════════════════════════════════ -->
+<script>
+const canvas = document.getElementById('wf');
+const ctx = canvas.getContext('2d');
+function resize() {
+  canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+  canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+  ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+}
+resize();
+window.addEventListener('resize', resize);
+const W = () => canvas.offsetWidth, H = () => canvas.offsetHeight;
+const NODE_COUNT = 32;
+let nodes = Array.from({length: NODE_COUNT}, () => ({
+  x: Math.random()*2-1, y: Math.random()*2-1, z: Math.random()*2-1,
+  vx: (Math.random()-.5)*.003, vy: (Math.random()-.5)*.003, vz: (Math.random()-.5)*.003,
+  r: Math.random() < .15 ? 3.5 : 1.8,
+  pulse: Math.random()*Math.PI*2
+}));
+let angle = 0;
+function project(x,y,z) {
+  const fov=800, dist=2.5, scale=fov/(fov+z*dist*W()*.002);
+  return {sx: W()/2+x*scale*W()*.38, sy: H()/2+y*scale*H()*.38, scale};
+}
+function rotY(x,z,a) { return {x:x*Math.cos(a)-z*Math.sin(a), z:x*Math.sin(a)+z*Math.cos(a)}; }
+function draw(t) {
+  ctx.clearRect(0,0,W(),H());
+  angle += .003;
+  const proj = nodes.map(n => { const r=rotY(n.x,n.z,angle); return {...project(r.x,n.y,r.z), r:n.r, pulse:n.pulse}; });
+  for(let i=0;i<proj.length;i++) for(let j=i+1;j<proj.length;j++) {
+    const dx=nodes[i].x-nodes[j].x, dy=nodes[i].y-nodes[j].y, dz=nodes[i].z-nodes[j].z;
+    const dist=Math.sqrt(dx*dx+dy*dy+dz*dz);
+    if(dist<.9) {
+      ctx.beginPath(); ctx.moveTo(proj[i].sx,proj[i].sy); ctx.lineTo(proj[j].sx,proj[j].sy);
+      ctx.strokeStyle=`rgba(0,212,255,${(1-dist/.9)*.22})`; ctx.lineWidth=.8; ctx.stroke();
+    }
+  }
+  proj.forEach((p,i) => {
+    const pulse=Math.sin(t*.002+nodes[i].pulse)*.5+.5, r=p.r*p.scale;
+    if(p.r>2) {
+      const g=ctx.createRadialGradient(p.sx,p.sy,0,p.sx,p.sy,r*5);
+      g.addColorStop(0,`rgba(0,212,255,${.4*pulse})`); g.addColorStop(1,'rgba(0,212,255,0)');
+      ctx.beginPath(); ctx.arc(p.sx,p.sy,r*5,0,Math.PI*2); ctx.fillStyle=g; ctx.fill();
+    }
+    ctx.beginPath(); ctx.arc(p.sx,p.sy,r,0,Math.PI*2);
+    ctx.fillStyle=p.r>2?'#00D4FF':`rgba(0,212,255,${.5+.5*pulse})`; ctx.fill();
+  });
+  nodes.forEach(n => {
+    n.x+=n.vx; n.y+=n.vy; n.z+=n.vz;
+    if(Math.abs(n.x)>1)n.vx*=-1; if(Math.abs(n.y)>1)n.vy*=-1; if(Math.abs(n.z)>1)n.vz*=-1;
+  });
+  requestAnimationFrame(draw);
+}
+requestAnimationFrame(draw);
+</script>
+
+</body>
+</html>

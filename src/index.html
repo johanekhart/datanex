@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Datanex — AI Crypto Intelligence</title>
+  <meta name="description" content="Real-time statistieken voor AI Agent projecten en AI Privacy protocollen. Hype van waarde scheiden met verifieerbare on-chain data.">
+  <link rel="icon" type="image/svg+xml" href="../public/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════
+       NAVIGATIE
+  ══════════════════════════════════════════ -->
+  <nav class="nav">
+    <a href="index.html" class="nav-brand">
+      <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <text x="1" y="26" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="26" fill="#0A0A0F">d</text>
+        <circle cx="27" cy="7" r="4.5" fill="#00D4FF"/>
+      </svg>
+      <span class="nav-logo-text">datanex<span class="dot">.</span></span>
+    </a>
+
+    <div class="nav-links">
+      <a href="index.html">Dashboard</a>
+      <a href="#">Agent Economy</a>
+      <a href="#">Privacy</a>
+      <a href="#">Projecten</a>
+      <a href="#">Over</a>
+    </div>
+
+    <a href="#" class="btn-cyan">Live Data</a>
+  </nav>
+
+
+  <!-- ══════════════════════════════════════════
+       HERO — Donkere achtergrond + wireframe animatie
+  ══════════════════════════════════════════ -->
+  <section class="hero">
+    <canvas id="hero-canvas"></canvas>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">Live AI Crypto Intelligence</div>
+      <h1 class="hero-headline">Data die hype<br>van waarde scheidt.</h1>
+      <p class="hero-sub">
+        Real-time statistieken voor AI Agent projecten en AI Privacy protocollen.
+        Protocol revenue, on-chain activiteit, agent economy — alles op één plek.
+      </p>
+      <div class="hero-ctas">
+        <a href="#" class="btn-black">Bekijk Dashboard</a>
+        <a href="#" class="btn-outline-light">Alle projecten →</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════
+       KEY STATISTIEKEN
+  ══════════════════════════════════════════ -->
+  <section class="key-stats">
+    <div class="key-stats-inner">
+      <div class="section-label">Sector overzicht — dummy data</div>
+      <div class="stats-grid">
+
+        <div class="stat-card">
+          <div class="stat-label">Sector Marktcap</div>
+          <div class="stat-value">$22.6B</div>
+          <div class="stat-delta">↑ +12.4% deze maand</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Actieve Projecten</div>
+          <div class="stat-value">919</div>
+          <div class="stat-delta">↑ +34 nieuw dit kwartaal</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Agent GDP (aGDP)</div>
+          <div class="stat-value accent">$479M</div>
+          <div class="stat-delta">↑ +67.2% YTD</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Active Wallets</div>
+          <div class="stat-value">1.78M</div>
+          <div class="stat-delta">↑ +8.3% deze week</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════
+       AI AGENT PROJECTEN
+  ══════════════════════════════════════════ -->
+  <section class="projects-section">
+    <div class="projects-inner">
+
+      <div class="section-header">
+        <div class="section-heading-group">
+          <div class="section-label">Categorie</div>
+          <h2 class="section-title">AI Agent Projecten</h2>
+        </div>
+        <a href="#" class="section-link">Bekijk alle Agent projecten →</a>
+      </div>
+
+      <div class="projects-grid">
+
+        <!-- Bittensor -->
+        <div class="project-card">
+          <div class="project-card-header">
+            <div>
+              <div class="project-name">Bittensor</div>
+              <div class="project-ticker">TAO</div>
+            </div>
+            <span class="tag tag-agent">Agent</span>
+          </div>
+          <div class="card-label">Protocol Revenue</div>
+          <div class="card-value">$8.4M <span class="card-value-unit">/ maand</span></div>
+          <div class="card-delta">↑ +34.2% YTD</div>
+          <div class="card-secondary">
+            <div class="card-secondary-item">
+              <div class="card-label">Active Wallets</div>
+              <div class="card-secondary-val">142,300</div>
+            </div>
+            <div class="card-secondary-item">
+              <div class="card-label">Subnets</div>
+              <div class="card-secondary-val">89</div>
+            </div>
+          </div>
+          <div class="card-label">Utility Score</div>
+          <div class="bar"><div class="bar-fill" style="width: 84%"></div></div>
+        </div>
+
+        <!-- Virtuals Protocol -->
+        <div class="project-card">
+          <div class="project-card-header">
+            <div>
+              <div class="project-name">Virtuals Protocol</div>
+              <div class="project-ticker">VIRTUAL</div>
+            </div>
+            <span class="tag tag-agent">Agent</span>
+          </div>
+          <div class="card-label">Agent GDP</div>
+          <div class="card-value">$127M</div>
+          <div class="card-delta">↑ +128.4% YTD</div>
+          <div class="card-secondary">
+            <div class="card-secondary-item">
+              <div class="card-label">Agent Jobs</div>
+              <div class="card-secondary-val">2.4M</div>
+            </div>
+            <div class="card-secondary-item">
+              <div class="card-label">Active Wallets</div>
+              <div class="card-secondary-val">89,400</div>
+            </div>
+          </div>
+          <div class="card-label">Utility Score</div>
+          <div class="bar"><div class="bar-fill" style="width: 72%"></div></div>
+        </div>
+
+        <!-- Fetch.ai -->
+        <div class="project-card">
+          <div class="project-card-header">
+            <div>
+              <div class="project-name">Fetch.ai</div>
+              <div class="project-ticker">FET</div>
+            </div>
+            <span class="tag tag-agent">Agent</span>
+          </div>
+          <div class="card-label">Active Agents</div>
+          <div class="card-value">14,200</div>
+          <div class="card-delta">↑ +22.1% deze maand</div>
+          <div class="card-secondary">
+            <div class="card-secondary-item">
+              <div class="card-label">Protocol Revenue</div>
+              <div class="card-secondary-val">$3.1M</div>
+            </div>
+            <div class="card-secondary-item">
+              <div class="card-label">Transacties</div>
+              <div class="card-secondary-val">8.7M</div>
+            </div>
+          </div>
+          <div class="card-label">Utility Score</div>
+          <div class="bar"><div class="bar-fill" style="width: 61%"></div></div>
+        </div>
+
+        <!-- Render -->
+        <div class="project-card">
+          <div class="project-card-header">
+            <div>
+              <div class="project-name">Render</div>
+              <div class="project-ticker">RNDR</div>
+            </div>
+            <span class="tag tag-compute">Compute</span>
+          </div>
+          <div class="card-label">Protocol Revenue</div>
+          <div class="card-value">$12.8M <span class="card-value-unit">/ maand</span></div>
+          <div class="card-delta">↑ +41.7% YTD</div>
+          <div class="card-secondary">
+            <div class="card-secondary-item">
+              <div class="card-label">Active Nodes</div>
+              <div class="card-secondary-val">11,400</div>
+            </div>
+            <div class="card-secondary-item">
+              <div class="card-label">Render Jobs</div>
+              <div class="card-secondary-val">4.2M</div>
+            </div>
+          </div>
+          <div class="card-label">Utility Score</div>
+          <div class="bar"><div class="bar-fill" style="width: 78%"></div></div>
+        </div>
+
+        <!-- io.net -->
+        <div class="project-card">
+          <div class="project-card-header">
+            <div>
+              <div class="project-name">io.net</div>
+              <div class="project-ticker">IO</div>
+            </div>
+            <span class="tag tag-compute">Compute</span>
+          </div>
+          <div class="card-label">GPU Clusters</div>
+          <div class="card-value">8,400</div>
+          <div class="card-delta">↑ +15.3% deze maand</div>
+          <div class="card-secondary">
+            <div class="card-secondary-item">
+              <div class="card-label">Protocol Revenue</div>
+              <div class="card-secondary-val">$2.1M</div>
+            </div>
+            <div class="card-secondary-item">
+              <div class="card-label">Active Workers</div>
+              <div class="card-secondary-val">34,800</div>
+            </div>
+          </div>
+          <div class="card-label">Utility Score</div>
+          <div class="bar"><div class="bar-fill" style="width: 55%"></div></div>
+        </div>
+
+        <!-- Akash Network -->
+        <div class="project-card">
+          <div class="project-card-header">
+            <div>
+              <div class="project-name">Akash Network</div>
+              <div class="project-ticker">AKT</div>
+            </div>
+            <span class="tag tag-compute">Compute</span>
+          </div>
+          <div class="card-label">Active Deployments</div>
+          <div class="card-value">6,700</div>
+          <div class="card-delta neg">↓ −3.2% deze week</div>
+          <div class="card-secondary">
+            <div class="card-secondary-item">
+              <div class="card-label">Protocol Revenue</div>
+              <div class="card-secondary-val">$1.8M</div>
+            </div>
+            <div class="card-secondary-item">
+              <div class="card-label">Providers</div>
+              <div class="card-secondary-val">847</div>
+            </div>
+          </div>
+          <div class="card-label">Utility Score</div>
+          <div class="bar"><div class="bar-fill" style="width: 49%"></div></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════
+       AI PRIVACY PROJECTEN
+  ══════════════════════════════════════════ -->
+  <section class="projects-section alt">
+    <div class="projects-inner">
+
+      <div class="section-header">
+        <div class="section-heading-group">
+          <div class="section-label">Categorie</div>
+          <h2 class="section-title">AI Privacy Projecten</h2>
+        </div>
+        <a href="#" class="section-link">Bekijk alle Privacy projecten →</a>
+      </div>
+
+      <div class="projects-grid">
+
+        <!-- NEAR Protocol -->
+        <div class="project-card">
+          <div class="project-card-header">
+            <div>
+              <div class="project-name">NEAR Protocol</div>
+              <div class="project-ticker">NEAR</div>
+            </div>
+            <span class="tag tag-privacy">Privacy</span>
+          </div>
+          <div class="card-label">Private Inference</div>
+          <div class="card-value">1.2B <span class="card-value-unit">req</span></div>
+          <div class="card-delta neg">↓ −2.1% deze week</div>
+          <div class="card-secondary">
+            <div class="card-secondary-item">
+              <div class="card-label">TEE Nodes</div>
+              <div class="card-secondary-val">3,400</div>
+            </div>
+            <div class="card-secondary-item">
+              <div class="card-label">Active Wallets</div>
+              <div class="card-secondary-val">284K</div>
+            </div>
+          </div>
+          <div class="card-label">Utility Score</div>
+          <div class="bar"><div class="bar-fill privacy" style="width: 68%"></div></div>
+        </div>
+
+        <!-- Secret Network -->
+        <div class="project-card">
+          <div class="project-card-header">
+            <div>
+              <div class="project-name">Secret Network</div>
+              <div class="project-ticker">SCRT</div>
+            </div>
+            <span class="tag tag-privacy">Privacy</span>
+          </div>
+          <div class="card-label">Private Transacties</div>
+          <div class="card-value">8.4M</div>
+          <div class="card-delta">↑ +18.7% YTD</div>
+          <div class="card-secondary">
+            <div class="card-secondary-item">
+              <div class="card-label">Active Nodes</div>
+              <div class="card-secondary-val">890</div>
+            </div>
+            <div class="card-secondary-item">
+              <div class="card-label">ZK Transacties</div>
+              <div class="card-secondary-val">2.1M</div>
+            </div>
+          </div>
+          <div class="card-label">Utility Score</div>
+          <div class="bar"><div class="bar-fill privacy" style="width: 57%"></div></div>
+        </div>
+
+        <!-- Oasis Protocol -->
+        <div class="project-card">
+          <div class="project-card-header">
+            <div>
+              <div class="project-name">Oasis Protocol</div>
+              <div class="project-ticker">ROSE</div>
+            </div>
+            <span class="tag tag-privacy">Privacy</span>
+          </div>
+          <div class="card-label">Confid. Contracts</div>
+          <div class="card-value">12,400</div>
+          <div class="card-delta">↑ +9.4% deze maand</div>
+          <div class="card-secondary">
+            <div class="card-secondary-item">
+              <div class="card-label">TEE Nodes</div>
+              <div class="card-secondary-val">2,800</div>
+            </div>
+            <div class="card-secondary-item">
+              <div class="card-label">Data Markt Vol.</div>
+              <div class="card-secondary-val">$4.2M</div>
+            </div>
+          </div>
+          <div class="card-label">Utility Score</div>
+          <div class="bar"><div class="bar-fill privacy" style="width: 63%"></div></div>
+        </div>
+
+        <!-- Phala Network -->
+        <div class="project-card">
+          <div class="project-card-header">
+            <div>
+              <div class="project-name">Phala Network</div>
+              <div class="project-ticker">PHA</div>
+            </div>
+            <span class="tag tag-privacy">Privacy</span>
+          </div>
+          <div class="card-label">TEE Workers</div>
+          <div class="card-value">28,400</div>
+          <div class="card-delta">↑ +31.2% YTD</div>
+          <div class="card-secondary">
+            <div class="card-secondary-item">
+              <div class="card-label">Private Inference</div>
+              <div class="card-secondary-val">340M</div>
+            </div>
+            <div class="card-secondary-item">
+              <div class="card-label">Conf. Contracts</div>
+              <div class="card-secondary-val">8,900</div>
+            </div>
+          </div>
+          <div class="card-label">Utility Score</div>
+          <div class="bar"><div class="bar-fill privacy" style="width: 71%"></div></div>
+        </div>
+
+        <!-- Nym -->
+        <div class="project-card">
+          <div class="project-card-header">
+            <div>
+              <div class="project-name">Nym</div>
+              <div class="project-ticker">NYM</div>
+            </div>
+            <span class="tag tag-privacy">Privacy</span>
+          </div>
+          <div class="card-label">Mixnet Nodes</div>
+          <div class="card-value">1,240</div>
+          <div class="card-delta">↑ +5.8% deze maand</div>
+          <div class="card-secondary">
+            <div class="card-secondary-item">
+              <div class="card-label">Privacy Bandwidth</div>
+              <div class="card-secondary-val">84 TB</div>
+            </div>
+            <div class="card-secondary-item">
+              <div class="card-label">Active Users</div>
+              <div class="card-secondary-val">18,400</div>
+            </div>
+          </div>
+          <div class="card-label">Utility Score</div>
+          <div class="bar"><div class="bar-fill privacy" style="width: 44%"></div></div>
+        </div>
+
+        <!-- Aztec -->
+        <div class="project-card">
+          <div class="project-card-header">
+            <div>
+              <div class="project-name">Aztec</div>
+              <div class="project-ticker">AZTEC</div>
+            </div>
+            <span class="tag tag-privacy">Privacy</span>
+          </div>
+          <div class="card-label">ZK-Proof Transacties</div>
+          <div class="card-value">3.7M</div>
+          <div class="card-delta">↑ +88.3% YTD</div>
+          <div class="card-secondary">
+            <div class="card-secondary-item">
+              <div class="card-label">Private Wallets</div>
+              <div class="card-secondary-val">42,100</div>
+            </div>
+            <div class="card-secondary-item">
+              <div class="card-label">Proof Volume</div>
+              <div class="card-secondary-val">$1.4M</div>
+            </div>
+          </div>
+          <div class="card-label">Utility Score</div>
+          <div class="bar"><div class="bar-fill privacy" style="width: 59%"></div></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="footer-inner">
+
+      <div class="footer-brand">
+        <svg width="18" height="18" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <text x="1" y="26" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="26" fill="#0A0A0F">d</text>
+          <circle cx="27" cy="7" r="4.5" fill="#00D4FF"/>
+        </svg>
+        <span class="nav-logo-text">datanex<span class="dot">.</span></span>
+        <span class="footer-tagline">Data die hype van waarde scheidt.</span>
+      </div>
+
+      <div class="footer-links">
+        <a href="#">Dashboard</a>
+        <a href="#">Agent Economy</a>
+        <a href="#">Privacy</a>
+        <a href="#">Projecten</a>
+        <a href="#">Over</a>
+        <a href="#">Methodologie</a>
+      </div>
+
+      <div class="footer-copy">&copy; 2026 Datanex.nl</div>
+
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
