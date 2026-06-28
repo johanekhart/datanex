@@ -181,7 +181,7 @@
         { label: 'Completed Jobs',  val: formatGetal(p.completed_jobs)  },
       ];
 
-    } else { /* privacy / data */
+    } else { /* privacy */
       const heeftInference = p.private_inference_volume != null;
       if (heeftInference) {
         primaireLabel = 'Private Inference';
@@ -203,13 +203,13 @@
       : '';
 
     const utilityScore = p.utility_score ?? 0;
-    const barKlasse    = cat === 'privacy' || cat === 'data' ? 'bar-fill privacy' : 'bar-fill';
+    const barKlasse    = cat === 'privacy' ? 'bar-fill privacy' : 'bar-fill';
 
-    const tagLabels = { agent: 'Agent', compute: 'Compute', privacy: 'Privacy', data: 'Data' };
+    const tagLabels = { agent: 'Agent', compute: 'Compute', privacy: 'Privacy' };
     const tagLabel  = tagLabels[cat] || escapeHtml(cat);
 
-    /* Slug in hoofdletters als tijdelijke ticker (kan later vervangen worden door DB-veld) */
-    const ticker = p.slug.toUpperCase();
+    /* Ticker uit de database, slug.toUpperCase() als fallback */
+    const ticker = p.ticker || p.slug.toUpperCase();
 
     return `
       <div class="project-card">
@@ -264,20 +264,25 @@
       vulIn('stat-gdp',       formatValuta(s.totaal_agent_gdp));
       vulIn('stat-wallets',   formatGetal(s.totaal_wallets));
 
-      /* Project grids vullen */
-      const agentCats   = ['agent', 'compute'];
-      const privacyCats = ['privacy', 'data'];
-
-      const agentProjecten   = (data.projecten || []).filter(p => agentCats.includes(p.categorie));
-      const privacyProjecten = (data.projecten || []).filter(p => privacyCats.includes(p.categorie));
+      /* Project grids vullen — één per categorie */
+      const agentProjecten   = (data.projecten || []).filter(p => p.categorie === 'agent');
+      const computeProjecten = (data.projecten || []).filter(p => p.categorie === 'compute');
+      const privacyProjecten = (data.projecten || []).filter(p => p.categorie === 'privacy');
 
       const gridAgent   = document.getElementById('grid-agent');
+      const gridCompute = document.getElementById('grid-compute');
       const gridPrivacy = document.getElementById('grid-privacy');
 
       if (gridAgent) {
         gridAgent.innerHTML = agentProjecten.length > 0
           ? agentProjecten.map(renderKaart).join('')
           : '<div class="grid-laadt">Geen agent-projecten gevonden</div>';
+      }
+
+      if (gridCompute) {
+        gridCompute.innerHTML = computeProjecten.length > 0
+          ? computeProjecten.map(renderKaart).join('')
+          : '<div class="grid-laadt">Geen compute-projecten gevonden</div>';
       }
 
       if (gridPrivacy) {
@@ -289,6 +294,7 @@
     } catch (fout) {
       console.error('Dashboard laad fout:', fout);
       toonFout('grid-agent',   'Data tijdelijk niet beschikbaar');
+      toonFout('grid-compute', 'Data tijdelijk niet beschikbaar');
       toonFout('grid-privacy', 'Data tijdelijk niet beschikbaar');
     }
   }

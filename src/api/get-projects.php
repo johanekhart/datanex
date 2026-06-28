@@ -27,10 +27,12 @@ try {
         SELECT
             p.id,
             p.naam,
+            p.ticker,
             p.slug,
             p.categorie,
             p.beschrijving,
             p.website,
+            p.coingecko_id,
 
             /* Laatste marktdata */
             ps.marktcap,
