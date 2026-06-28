@@ -9,16 +9,6 @@
 
 require_once __DIR__ . '/../config.php';
 
-/* Mapping van onze project slug naar de CoinGecko coin ID */
-const COINGECKO_MAP = [
-    'virtuals'  => 'virtual-protocol',
-    'bittensor' => 'bittensor',
-    'render'    => 'render-token',
-    'near'      => 'near',
-    'oasis'     => 'oasis-network',
-    'zcash'     => 'zcash',
-];
-
 /* CoinGecko gratis API basis-URL */
 const COINGECKO_API = 'https://api.coingecko.com/api/v3';
 
@@ -32,22 +22,19 @@ function fetchCoinGeckoData(): array {
     $bijgewerkt = 0;
     $vandaag = date('Y-m-d');
 
-    /* ── Actieve projecten ophalen die een CoinGecko ID hebben ── */
+    /* ── Actieve projecten ophalen met hun CoinGecko ID uit de database ── */
     $projecten = $pdo->query(
-        "SELECT id, slug FROM projects WHERE actief = 1"
+        "SELECT id, coingecko_id FROM projects WHERE actief = 1 AND coingecko_id IS NOT NULL"
     )->fetchAll();
 
-    /* Bepaal welke CoinGecko IDs we nodig hebben */
+    /* Bouw de lijst van coin IDs en de terugkoppeling naar project ID */
     $coin_ids = [];
     $slug_naar_project_id = [];
 
     foreach ($projecten as $p) {
-        $slug = $p['slug'];
-        if (isset(COINGECKO_MAP[$slug])) {
-            $coingecko_id = COINGECKO_MAP[$slug];
-            $coin_ids[] = $coingecko_id;
-            $slug_naar_project_id[$coingecko_id] = (int) $p['id'];
-        }
+        $coingecko_id = $p['coingecko_id'];
+        $coin_ids[] = $coingecko_id;
+        $slug_naar_project_id[$coingecko_id] = (int) $p['id'];
     }
 
     if (empty($coin_ids)) {
