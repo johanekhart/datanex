@@ -116,3 +116,188 @@
 
   requestAnimationFrame(draw);
 })();
+
+
+/* ══════════════════════════════════════════
+   DASHBOARD — Data ophalen en renderen
+══════════════════════════════════════════ */
+(function () {
+
+  /* ── Hulpfuncties voor getalopmaak ── */
+
+  function formatValuta(n) {
+    if (n == null) return '—';
+    if (n >= 1e12) return '$' + (n / 1e12).toFixed(1) + 'T';
+    if (n >= 1e9)  return '$' + (n / 1e9).toFixed(1)  + 'B';
+    if (n >= 1e6)  return '$' + (n / 1e6).toFixed(1)  + 'M';
+    if (n >= 1e3)  return '$' + (n / 1e3).toFixed(1)  + 'K';
+    return '$' + Number(n).toFixed(2);
+  }
+
+  function formatGetal(n) {
+    if (n == null) return '—';
+    if (n >= 1e9)  return (n / 1e9).toFixed(1) + 'B';
+    if (n >= 1e6)  return (n / 1e6).toFixed(1) + 'M';
+    if (n >= 1e3)  return (n / 1e3).toFixed(0) + 'K';
+    return Number(n).toLocaleString('nl-NL');
+  }
+
+  function formatDelta(n, suffix) {
+    if (n == null) return '';
+    const pijl  = n >= 0 ? '↑' : '↓';
+    const teken = n >= 0 ? '+' : '';
+    return pijl + ' ' + teken + Number(n).toFixed(1) + (suffix || '%');
+  }
+
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  /* ── Project kaart renderen op basis van categorie ── */
+  function renderKaart(p) {
+    const cat = p.categorie;
+
+    let primaireLabel, primaireHtml, secondaire;
+
+    if (cat === 'agent') {
+      const heeftRevenue = p.protocol_revenue != null;
+      primaireLabel = heeftRevenue ? 'Protocol Revenue' : 'Agent GDP';
+      const primVal = heeftRevenue ? p.protocol_revenue : p.agent_gdp;
+      primaireHtml  = formatValuta(primVal) + ' <span class="card-value-unit">/ maand</span>';
+      secondaire = [
+        { label: 'Active Wallets',  val: formatGetal(p.active_wallets)  },
+        { label: 'Completed Jobs',  val: formatGetal(p.completed_jobs)  },
+      ];
+
+    } else if (cat === 'compute') {
+      primaireLabel = 'Protocol Revenue';
+      primaireHtml  = formatValuta(p.protocol_revenue) + ' <span class="card-value-unit">/ maand</span>';
+      secondaire = [
+        { label: 'Active Wallets',  val: formatGetal(p.active_wallets)  },
+        { label: 'Completed Jobs',  val: formatGetal(p.completed_jobs)  },
+      ];
+
+    } else { /* privacy / data */
+      const heeftInference = p.private_inference_volume != null;
+      if (heeftInference) {
+        primaireLabel = 'Private Inference';
+        primaireHtml  = formatGetal(p.private_inference_volume) + ' <span class="card-value-unit">req</span>';
+      } else {
+        primaireLabel = 'ZK-Proof Transacties';
+        primaireHtml  = formatGetal(p.zk_transacties);
+      }
+      secondaire = [
+        { label: 'TEE Nodes',      val: formatGetal(p.tee_nodes)     },
+        { label: 'Data Volume',    val: formatValuta(p.data_volume)  },
+      ];
+    }
+
+    const delta      = p.prijs_wijziging_24h;
+    const deltaKlasse = delta != null && delta < 0 ? 'neg' : '';
+    const deltaHtml   = delta != null
+      ? `<div class="card-delta ${deltaKlasse}">${escapeHtml(formatDelta(delta, '% 24h'))}</div>`
+      : '';
+
+    const utilityScore = p.utility_score ?? 0;
+    const barKlasse    = cat === 'privacy' || cat === 'data' ? 'bar-fill privacy' : 'bar-fill';
+
+    const tagLabels = { agent: 'Agent', compute: 'Compute', privacy: 'Privacy', data: 'Data' };
+    const tagLabel  = tagLabels[cat] || escapeHtml(cat);
+
+    /* Slug in hoofdletters als tijdelijke ticker (kan later vervangen worden door DB-veld) */
+    const ticker = p.slug.toUpperCase();
+
+    return `
+      <div class="project-card">
+        <div class="project-card-header">
+          <div>
+            <div class="project-name">${escapeHtml(p.naam)}</div>
+            <div class="project-ticker">${escapeHtml(ticker)}</div>
+          </div>
+          <span class="tag tag-${escapeHtml(cat)}">${tagLabel}</span>
+        </div>
+        <div class="card-label">${escapeHtml(primaireLabel)}</div>
+        <div class="card-value">${primaireHtml}</div>
+        ${deltaHtml}
+        <div class="card-secondary">
+          ${secondaire.map(s => `
+            <div class="card-secondary-item">
+              <div class="card-label">${escapeHtml(s.label)}</div>
+              <div class="card-secondary-val">${s.val}</div>
+            </div>
+          `).join('')}
+        </div>
+        <div class="card-label">Utility Score</div>
+        <div class="bar"><div class="${barKlasse}" style="width: ${utilityScore}%"></div></div>
+      </div>
+    `;
+  }
+
+  /* ── Foutmelding tonen in een grid ── */
+  function toonFout(id, tekst) {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = `<div class="grid-laadt" style="color:var(--mid-gray)">${escapeHtml(tekst)}</div>`;
+  }
+
+  /* ── Hoofd laadlogica ── */
+  async function laadDashboard() {
+    try {
+      const resp = await fetch('api/get-projects.php');
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+
+      const data = await resp.json();
+      if (!data.succes) throw new Error(data.fout || 'API fout');
+
+      /* Sector statistieken invullen */
+      const s = data.sector || {};
+      const vulIn = (id, waarde) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = waarde;
+      };
+
+      vulIn('stat-marktcap',  formatValuta(s.totaal_marktcap));
+      vulIn('stat-projecten', s.actieve_projecten ?? '—');
+      vulIn('stat-gdp',       formatValuta(s.totaal_agent_gdp));
+      vulIn('stat-wallets',   formatGetal(s.totaal_wallets));
+
+      /* Project grids vullen */
+      const agentCats   = ['agent', 'compute'];
+      const privacyCats = ['privacy', 'data'];
+
+      const agentProjecten   = (data.projecten || []).filter(p => agentCats.includes(p.categorie));
+      const privacyProjecten = (data.projecten || []).filter(p => privacyCats.includes(p.categorie));
+
+      const gridAgent   = document.getElementById('grid-agent');
+      const gridPrivacy = document.getElementById('grid-privacy');
+
+      if (gridAgent) {
+        gridAgent.innerHTML = agentProjecten.length > 0
+          ? agentProjecten.map(renderKaart).join('')
+          : '<div class="grid-laadt">Geen agent-projecten gevonden</div>';
+      }
+
+      if (gridPrivacy) {
+        gridPrivacy.innerHTML = privacyProjecten.length > 0
+          ? privacyProjecten.map(renderKaart).join('')
+          : '<div class="grid-laadt">Geen privacy-projecten gevonden</div>';
+      }
+
+    } catch (fout) {
+      console.error('Dashboard laad fout:', fout);
+      toonFout('grid-agent',   'Data tijdelijk niet beschikbaar');
+      toonFout('grid-privacy', 'Data tijdelijk niet beschikbaar');
+    }
+  }
+
+  /* Start nadat de DOM geladen is */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', laadDashboard);
+  } else {
+    laadDashboard();
+  }
+
+})();
