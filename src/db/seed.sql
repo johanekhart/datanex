@@ -6,12 +6,12 @@
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
--- Leeg alle tabellen zodat het bestand opnieuw uitvoerbaar is
-TRUNCATE TABLE `hype_scores`;
-TRUNCATE TABLE `privacy_metrics`;
-TRUNCATE TABLE `agent_metrics`;
-TRUNCATE TABLE `project_stats`;
-TRUNCATE TABLE `projects`;
+-- Leeg alle tabellen in omgekeerde FK-volgorde (DELETE werkt, TRUNCATE niet op parent-tabellen)
+DELETE FROM `hype_scores`;
+DELETE FROM `privacy_metrics`;
+DELETE FROM `agent_metrics`;
+DELETE FROM `project_stats`;
+DELETE FROM `projects`;
 
 -- ============================================================
 -- PROJECTEN
