@@ -211,6 +211,20 @@
     /* Ticker uit de database, slug.toUpperCase() als fallback */
     const ticker = p.ticker || p.slug.toUpperCase();
 
+    /* Marktdata altijd tonen als beschikbaar */
+    const marktdataHtml = `
+      <div class="card-secondary">
+        <div class="card-secondary-item">
+          <div class="card-label">Marktcap</div>
+          <div class="card-secondary-val">${formatValuta(p.marktcap)}</div>
+        </div>
+        <div class="card-secondary-item">
+          <div class="card-label">Volume 24u</div>
+          <div class="card-secondary-val">${formatValuta(p.volume_24h)}</div>
+        </div>
+      </div>
+    `;
+
     return `
       <div class="project-card">
         <div class="project-card-header">
@@ -223,6 +237,7 @@
         <div class="card-label">${escapeHtml(primaireLabel)}</div>
         <div class="card-value">${primaireHtml}</div>
         ${deltaHtml}
+        ${marktdataHtml}
         <div class="card-secondary">
           ${secondaire.map(s => `
             <div class="card-secondary-item">
