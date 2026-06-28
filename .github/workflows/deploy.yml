@@ -10,11 +10,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Deploy /src/ naar public_html
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      - name: Deploy /src/ naar public_html via FTP
+        uses: sebastianpopp/ftp-action@releases/v2
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
+          host: ${{ secrets.FTP_SERVER }}
+          user: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./src/
-          server-dir: /
+          localDir: ./src/
+          remoteDir: /
