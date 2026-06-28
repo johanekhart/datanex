@@ -1,0 +1,5 @@
+RewriteEngine On
+
+# Redirect www naar non-www (301 permanent)
+RewriteCond %{HTTP_HOST} ^www\.datanex\.nl [NC]
+RewriteRule ^(.*)$ https://datanex.nl/$1 [R=301,L]
