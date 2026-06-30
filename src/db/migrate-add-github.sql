@@ -17,10 +17,10 @@ UPDATE `projects` SET `github_repo` = 'opentensor/bittensor'              WHERE 
 UPDATE `projects` SET `github_repo` = 'fetchai/uagents'                   WHERE `slug` = 'fetch-ai';
 UPDATE `projects` SET `github_repo` = 'oceanprotocol/ocean.py'            WHERE `slug` = 'ocean-protocol';
 UPDATE `projects` SET `github_repo` = 'singnet/snet-daemon'               WHERE `slug` = 'singularitynet';
-UPDATE `projects` SET `github_repo` = 'akash-network/akash'               WHERE `slug` = 'akash';
-UPDATE `projects` SET `github_repo` = 'nosana-ci/nosana-node'             WHERE `slug` = 'nosana';
+UPDATE `projects` SET `github_repo` = 'akash-network/node'                WHERE `slug` = 'akash';
+UPDATE `projects` SET `github_repo` = 'nosana-io/nosana-node'             WHERE `slug` = 'nosana';
 UPDATE `projects` SET `github_repo` = 'near/nearcore'                     WHERE `slug` = 'near';
-UPDATE `projects` SET `github_repo` = 'oasisprotocol/oasis-node'          WHERE `slug` = 'oasis';
+UPDATE `projects` SET `github_repo` = 'oasisprotocol/oasis-core'          WHERE `slug` = 'oasis';
 UPDATE `projects` SET `github_repo` = 'zcash/zcash'                       WHERE `slug` = 'zcash';
 UPDATE `projects` SET `github_repo` = 'Cardinal-Cryptography/aleph-node'  WHERE `slug` = 'aleph-zero';
 UPDATE `projects` SET `github_repo` = 'rendernetwork/foundation-apps'     WHERE `slug` = 'render';

@@ -59,7 +59,7 @@ INSERT INTO `projects` (`naam`, `ticker`, `slug`, `categorie`, `beschrijving`, `
 (
     'Akash Network', 'AKT', 'akash', 'compute',
     'Open source gedecentraliseerde cloudmarktplaats voor het huren en verhuren van compute-resources. Alternatief voor AWS en Google Cloud.',
-    'https://akash.network', 'akash-network', 'akash-network/akash', 1
+    'https://akash.network', 'akash-network', 'akash-network/node', 1
 ),
 (
     'io.net', 'IO', 'io-net', 'compute',
@@ -69,7 +69,7 @@ INSERT INTO `projects` (`naam`, `ticker`, `slug`, `categorie`, `beschrijving`, `
 (
     'Nosana', 'NOS', 'nosana', 'compute',
     'Gedecentraliseerd CI/CD en GPU-compute platform gebouwd op Solana, gericht op AI-inference workloads voor ontwikkelaars en teams.',
-    'https://nosana.io', 'nosana', NULL, 1
+    'https://nosana.io', 'nosana', 'nosana-io/nosana-node', 1
 );
 
 -- ------------------------------------------------------------
@@ -84,7 +84,7 @@ INSERT INTO `projects` (`naam`, `ticker`, `slug`, `categorie`, `beschrijving`, `
 (
     'Oasis Network', 'ROSE', 'oasis', 'privacy',
     'Privacy-first blockchain met Trusted Execution Environments voor vertrouwelijk smart contract gebruik en private data tokenisering.',
-    'https://oasisprotocol.org', 'oasis-network', 'oasisprotocol/oasis-node', 1
+    'https://oasisprotocol.org', 'oasis-network', 'oasisprotocol/oasis-core', 1
 ),
 (
     'Zcash', 'ZEC', 'zcash', 'privacy',
