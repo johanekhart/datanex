@@ -54,7 +54,7 @@ INSERT INTO `projects` (`naam`, `ticker`, `slug`, `categorie`, `beschrijving`, `
 (
     'Render Network', 'RNDR', 'render', 'compute',
     'Gedecentraliseerd GPU-rendernetwerk dat idle rekenkracht verbindt met makers en AI-workloads. Gebouwd op Solana voor hoge doorvoer.',
-    'https://rendernetwork.com', 'render-token', 'rendernetwork/foundation-apps', 1
+    'https://rendernetwork.com', 'render-token', NULL, 1
 ),
 (
     'Akash Network', 'AKT', 'akash', 'compute',
@@ -69,7 +69,7 @@ INSERT INTO `projects` (`naam`, `ticker`, `slug`, `categorie`, `beschrijving`, `
 (
     'Nosana', 'NOS', 'nosana', 'compute',
     'Gedecentraliseerd CI/CD en GPU-compute platform gebouwd op Solana, gericht op AI-inference workloads voor ontwikkelaars en teams.',
-    'https://nosana.io', 'nosana', 'nosana-ci/nosana-node', 1
+    'https://nosana.io', 'nosana', NULL, 1
 );
 
 -- ------------------------------------------------------------
