@@ -28,17 +28,22 @@ $coingecko = fetchCoinGeckoData();
 require_once __DIR__ . '/fetch-github.php';
 $github = fetchGitHubData();
 
+/* ── Utility Scores berekenen op basis van verse data ── */
+require_once __DIR__ . '/calculate-scores.php';
+$scores = berekenUtilityScores();
+
 /* ── Logboek wegschrijven ── */
 $alle_fouten = array_merge($coingecko['fouten'] ?? [], $github['fouten'] ?? []);
-$status      = ($coingecko['succes'] && $github['succes']) ? 'OK' : 'FOUT';
+$status      = ($coingecko['succes'] && $github['succes'] && $scores['succes']) ? 'OK' : 'FOUT';
 
 $log_regel = sprintf(
-    "[%s] coingecko: %d/%d | github: %d/%d | fouten: %d | %s\n",
+    "[%s] coingecko: %d/%d | github: %d/%d | scores: %d | fouten: %d | %s\n",
     date('Y-m-d H:i:s'),
     $coingecko['bijgewerkt'] ?? 0,
     $coingecko['totaal']     ?? 0,
     $github['bijgewerkt']    ?? 0,
     $github['totaal']        ?? 0,
+    $scores['bijgewerkt']    ?? 0,
     count($alle_fouten),
     $status
 );
@@ -51,4 +56,5 @@ jsonHeaders();
 echo json_encode([
     'coingecko' => $coingecko,
     'github'    => $github,
+    'scores'    => $scores,
 ], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
