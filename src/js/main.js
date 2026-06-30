@@ -248,6 +248,11 @@
         </div>
         <div class="card-label">Utility Score</div>
         <div class="bar"><div class="${barKlasse}" style="width: ${utilityScore}%"></div></div>
+        ${p.github_commits != null ? `
+        <div class="card-github">
+          <div class="card-label">GitHub Commits (30d)</div>
+          <div class="card-secondary-val">${formatGetal(p.github_commits)}</div>
+        </div>` : ''}
       </div>
     `;
   }

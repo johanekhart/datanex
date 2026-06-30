@@ -20,25 +20,35 @@ if ($ontvangen_token !== CRON_TOKEN) {
     exit;
 }
 
-/* ── Voer de data-ophaalroutine uit ── */
+/* ── CoinGecko marktdata ophalen ── */
 require_once __DIR__ . '/fetch-data.php';
+$coingecko = fetchCoinGeckoData();
 
-$resultaat = fetchCoinGeckoData();
+/* ── GitHub commit-data ophalen ── */
+require_once __DIR__ . '/fetch-github.php';
+$github = fetchGitHubData();
 
-/* ── Sla het logboek op naast dit bestand ── */
+/* ── Logboek wegschrijven ── */
+$alle_fouten = array_merge($coingecko['fouten'] ?? [], $github['fouten'] ?? []);
+$status      = ($coingecko['succes'] && $github['succes']) ? 'OK' : 'FOUT';
+
 $log_regel = sprintf(
-    "[%s] bijgewerkt: %d/%d | fouten: %d | %s\n",
+    "[%s] coingecko: %d/%d | github: %d/%d | fouten: %d | %s\n",
     date('Y-m-d H:i:s'),
-    $resultaat['bijgewerkt'] ?? 0,
-    $resultaat['totaal']     ?? 0,
-    count($resultaat['fouten'] ?? []),
-    $resultaat['succes'] ? 'OK' : ('FOUT: ' . ($resultaat['fout'] ?? 'onbekend'))
+    $coingecko['bijgewerkt'] ?? 0,
+    $coingecko['totaal']     ?? 0,
+    $github['bijgewerkt']    ?? 0,
+    $github['totaal']        ?? 0,
+    count($alle_fouten),
+    $status
 );
 
-/* Log schrijven naar cron.log naast dit bestand */
 $log_pad = __DIR__ . '/cron.log';
 file_put_contents($log_pad, $log_regel, FILE_APPEND | LOCK_EX);
 
-/* ── Geef resultaat terug als JSON ── */
+/* ── Geef gecombineerd resultaat terug als JSON ── */
 jsonHeaders();
-echo json_encode($resultaat, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+echo json_encode([
+    'coingecko' => $coingecko,
+    'github'    => $github,
+], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);

@@ -461,6 +461,15 @@ body {
   background: #8888FF;
 }
 
+.card-github {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  margin-top: 10px;
+  border-top: 1px solid var(--light-gray);
+}
+
 /* ── FOOTER ── */
 
 .footer {

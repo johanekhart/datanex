@@ -30,6 +30,7 @@ CREATE TABLE `projects` (
     `website`       VARCHAR(255),
     `logo_url`      VARCHAR(255),
     `coingecko_id`  VARCHAR(100)        DEFAULT NULL COMMENT 'ID voor CoinGecko API-aanroepen',
+    `github_repo`   VARCHAR(100)        DEFAULT NULL COMMENT 'GitHub owner/repo voor commit-data (bijv. near/nearcore)',
     `actief`        TINYINT(1)          NOT NULL DEFAULT 1,
     `aangemaakt_op` DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
